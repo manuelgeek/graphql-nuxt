@@ -17,5 +17,10 @@ export const actions = {
     this.$cookies.set('gh-token', payload.api_token)
     this.$cookies.set('gh-user', payload)
     context.commit('updateUser')
+  },
+  logOut(context) {
+    this.$cookies.remove('gh-token')
+    this.$cookies.remove('gh-user')
+    context.commit('updateUser')
   }
 }

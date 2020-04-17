@@ -12,8 +12,9 @@
         <div class="px-6 py-4">
           <span
             class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
-            >About Me</span
           >
+            <a href="#" @click.prevent="logout">{{ button }}</a>
+          </span>
         </div>
       </div>
     </div>
@@ -27,11 +28,30 @@ export default {
   components: {
     Logo
   },
+  data() {
+    return {
+      button: 'Logout'
+    }
+  },
   middleware: 'auth',
   computed: {
     user() {
       // console.log(this.$store.state)
       return this.$store.state.user.currentUser
+    }
+  },
+  methods: {
+    logout() {
+      this.button = 'Logging out ...'
+      const query = `mutation { logOut(logout: true) }`
+      this.$axios.post('/', { query }).then((response) => {
+        if (response.data.data) {
+          const vm = this
+          this.$store.dispatch('user/logOut').then((_e) => {
+            vm.$router.push('/login')
+          })
+        }
+      })
     }
   }
 }

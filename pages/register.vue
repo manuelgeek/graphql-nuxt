@@ -138,26 +138,25 @@ export default {
           const cat = response.data.errors[0].extensions.category
           if (cat === 'validation') {
             this.errors = response.data.errors[0].extensions.validation
-            this.button = 'Sign In'
+            this.button = 'Sign Up'
             return
           }
           this.$toast.error('An Error occurred, try again !')
-          this.button = 'Sign In'
+          this.button = 'Sign Up'
           return
         }
         const vm = this
         if (response.data.data) {
           this.$store
-            .dispatch('user/loginUser', response.data.data.signUp)
+            .dispatch('user/loginUser', response.data.data.signIn)
             .then((_e) => {
-              this.form.name = ''
-              this.form.email = ''
-              this.form.password_confirmation = ''
-              this.form.password = ''
+              vm.form.email = ''
+              vm.form.password = ''
+              vm.$toast.success('Registration successful')
               vm.$router.push('/')
             })
         }
-        this.button = 'Sign In'
+        this.button = 'Sign Up'
       })
     }
   }
