@@ -118,11 +118,13 @@ export default {
   methods: {
     registerUser() {
       this.button = 'Signing In...'
+      this.errors = []
       const query = `mutation {
         signUp(
         name: "${this.form.name}"
         email: "${this.form.email}"
         password: "${this.form.password}"
+        password_confirmation: "${this.form.password_confirmation}"
       ) {
         id,
         email,
@@ -131,14 +133,15 @@ export default {
       }
     }`
       this.$axios.post('/auth', { query }).then((response) => {
-        console.log(response.data)
         if (response.data.errors || response.data.data.signUp === null) {
-          if (response.data.errors[0].extensions.category === 'extensions') {
-            console.log('here')
+          const cat = response.data.errors[0].extensions.category
+          if (cat === 'validation') {
             this.errors = response.data.errors[0].extensions.validation
+            this.button = 'Sign In'
             return
           }
-          alert('AN Error occurred, try again !')
+          this.$toast.error('An Error occurred, try again !')
+          this.button = 'Sign In'
           return
         }
         const vm = this

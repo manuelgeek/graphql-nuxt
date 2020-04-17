@@ -35,7 +35,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/axios'],
+  plugins: [
+    '~/plugins/axios',
+    { src: '~/plugins/vue-izitoast', mode: 'client' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
