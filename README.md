@@ -1,6 +1,6 @@
 # GraphQL-Nuxt JS
 
-> A sample Nuxt App (Vue) to consume GraphQL API
+> A sample Nuxt App (Vue) to consume GraphQL API 
 
 ## API details
 
