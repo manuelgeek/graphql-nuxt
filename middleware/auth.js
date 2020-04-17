@@ -5,6 +5,6 @@ export default function({ store, route, redirect, app }) {
 
   // If the user authenticated
   if (!token) {
-    return redirect('login/?prevURL=' + route.path)
+    return redirect('/login/?prevURL=' + route.path)
   }
 }
