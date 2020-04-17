@@ -4,7 +4,7 @@ export default function({ store, route, redirect, app }) {
   // console.warn('authenticated isLogin:', isLogin)
 
   // If the user authenticated
-  if (!token) {
-    return redirect('login/?prevURL=' + route.path)
+  if (token) {
+    return redirect('/')
   }
 }

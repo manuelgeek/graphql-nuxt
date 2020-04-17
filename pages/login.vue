@@ -64,7 +64,8 @@
 
 <script>
 export default {
-  name: 'Login'
+  name: 'Login',
+  middleware: 'unauth'
 }
 </script>
 

@@ -103,6 +103,7 @@
 
 <script>
 export default {
+  middleware: 'unauth',
   data() {
     return {
       form: {
@@ -147,8 +148,12 @@ export default {
         const vm = this
         if (response.data.data) {
           this.$store
-            .disparch('user/loginUser', response.data.data.signUp)
+            .dispatch('user/loginUser', response.data.data.signUp)
             .then((_e) => {
+              this.form.name = ''
+              this.form.email = ''
+              this.form.password_confirmation = ''
+              this.form.password = ''
               vm.$router.push('/')
             })
         }
