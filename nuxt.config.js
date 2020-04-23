@@ -20,9 +20,9 @@ export default {
   /*
    ** Middleware
    */
-  router: {
-    middleware: 'setUser'
-  },
+  // router: {
+  //   middleware: 'setUser' replaced by the store/index nuxtServerInit method
+  // },
 
   /*
    ** Customize the progress-bar color

@@ -1,4 +1,4 @@
-export default function({ $axios, redirect, store }) {
+export default function({ $axios, redirect, store, app }) {
   $axios.onRequest((config) => {
     console.log('Making request to ', config)
   })
@@ -11,9 +11,9 @@ export default function({ $axios, redirect, store }) {
     }
   })
 
-  const token = store.state.user.token
+  const token = app.$cookies.get('gh-token')
   if (token) {
-    console.log(token)
+    // console.log(token)
     $axios.setToken(token, 'Bearer')
   }
   $axios.setBaseURL(process.env.API_BASE_URL)

@@ -11,21 +11,17 @@
       >
     </div>
     <div class="bg-white flex flex-wr">
-      <ul class=" list-reset flex flex-col">
-        <li class=" rounded-t relative -mb-px block border p-4 border-grey">
+      <p v-if="$fetchState.pending">Fetching posts...</p>
+      <p v-else-if="$fetchState.error">
+        Error while fetching posts: {{ $fetchState.error.message }}
+      </p>
+      <ul v-else class=" list-reset flex flex-col">
+        <li
+          v-for="(wine, $index) in wines.data"
+          :key="$index"
+          class=" rounded-t relative -mb-px block border p-4 border-grey"
+        >
           Cras justo odio
-        </li>
-        <li class="relative -mb-px block border p-4 border-grey">
-          Da pibus ac facilisis in
-        </li>
-        <li class="relative -mb-px block border p-4 border-grey">
-          Morbi leo risus
-        </li>
-        <li class="relative -mb-px block border p-4 border-grey">
-          Porta ac consectetur ac
-        </li>
-        <li class="rounded-b relative block border p-4 border-grey">
-          Vestibulum at eros
         </li>
       </ul>
     </div>
@@ -34,7 +30,34 @@
 
 <script>
 export default {
-  name: 'Index'
+  name: 'Index',
+  async fetch() {
+    const query = `query
+{
+    wines (limit:10,page:1)
+    {
+        data{
+            id,
+            description,
+            color,
+            grape_variety,
+            country
+        },
+        total,
+        per_page,
+        current_page
+    }
+}`
+    await this.$axios.post('/', { query }).then((response) => {
+      this.wines = response.data.data.wines
+    })
+  },
+  data() {
+    return {
+      wines: []
+    }
+  },
+  middleware: 'auth'
 }
 </script>
 
