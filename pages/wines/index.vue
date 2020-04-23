@@ -21,7 +21,8 @@
           :key="$index"
           class=" rounded-t relative -mb-px block border p-4 border-grey"
         >
-          Cras justo odio
+          {{ wine.description }}, {{ wine.color }}, {{ wine.grape_variety }},
+          {{ wine.country }}
         </li>
       </ul>
     </div>
