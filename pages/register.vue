@@ -130,6 +130,7 @@ export default {
         id,
         email,
         name,
+        avatar,
         api_token
       }
     }`

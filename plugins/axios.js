@@ -11,8 +11,9 @@ export default function({ $axios, redirect, store }) {
     }
   })
 
-  const token = store.getters.isAuthenticated
+  const token = store.state.user.token
   if (token) {
+    console.log(token)
     $axios.setToken(token, 'Bearer')
   }
   $axios.setBaseURL(process.env.API_BASE_URL)
