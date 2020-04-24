@@ -21,8 +21,9 @@
           :key="$index"
           class=" rounded-t relative -mb-px block border p-4 border-grey"
         >
-          {{ wine.description }}, {{ wine.color }}, {{ wine.grape_variety }},
-          {{ wine.country }}
+          <b>Description: </b>{{ wine.description }}, <b>Color: </b
+          >{{ wine.color }}, <b>Grape Variety: </b>{{ wine.grape_variety }},
+          <b>Country: </b>{{ wine.country }}
         </li>
       </ul>
     </div>
