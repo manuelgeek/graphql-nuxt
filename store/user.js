@@ -3,7 +3,7 @@ export const state = () => ({
   currentUser: ''
 })
 
-export const mutation = () => ({
+export const getters = () => ({
   isAuthenticated: (state) => !!state.token
 })
 export const mutations = {
